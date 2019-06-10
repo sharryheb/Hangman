@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Hangman</title>
+
+    <link rel="stylesheet" href="assets/css/reset.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="assets/css/styles.css">
+
+    <link href="https://fonts.googleapis.com/css?family=Notable&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Faster+One|Notable&display=swap" rel="stylesheet">
+
+    <script src="https://kit.fontawesome.com/58f37b6463.js"></script>
+</head>
+
+<body>
+    <div id="wrapper">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8">
+                    <h1 class="display-3 text-center" id="hangman">Hangman</h1>
+                    <h3 class="text-center" id="subtitle">Tom Hanks' Movies Version</h3>
+                </div>
+                <div class="col-md-4 text-center">
+                    <img src="assets/images/THcurrent.jpg" class="img-fluid" alt="">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <hr class="hrule">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <h4>Press any key to start the game!</h4>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <h4 id="status"></h4>
+                </div>
+                <div class="col-md-6 text-right">
+                    <h4 id="winTotal"></h4>
+                </div>
+            </div> 
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="card mb-2" style="height: 45%">
+                        <div class="card-body">
+                            <h4 class="card-title">Guess the movie: </h4>
+                            <div class="card-text h4 mt-4 text-center" id="result"></div>
+                        </div>
+                    </div>
+                    <div class="card mb-3" style="height: 45%">
+                        <div class="card-body">
+                            <h4 class="card-title">Letters Already Used</h4>
+                            <p class="card-text h4 mt-4" id="pastGuesses">&nbsp;</p>
+                            <p class="card-text h5 pb-3">You have <span id="guessesRemaining">5</span> guesses remaining.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card mb-3" id="resultCard" style="visibility: hidden">
+                        <div class="embed-responsive embed-responsive-16by9">
+                            <iframe class="embed-responsive-item" id="movieClip" src=""></iframe>
+                        </div>
+                        <div class="card-body">
+                            <h4 class="card-title" id="movieTitle">Title</h4>
+                            <p class="card-text" id="movieText">Text</p>
+                        </div>
+                    </div>
+                </div>
+            </div>   
+        </div>
+    </div>
+</body>
+
+<script src="assets/javascript/data.js"></script>
+<script src="assets/javascript/game.js"></script>
+<script>
+
+    newGame = Object.create(Hangman);
+    newGame.initializeGame();
+    document.onkeyup = function (event) {
+        newGame.gameControl(event); 
+        if (newGame.gameOver === true) { newGame = Object.create(Hangman); newGame.initializeGame();}
+    };
+
+</script>
+</html>

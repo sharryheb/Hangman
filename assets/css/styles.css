@@ -1,0 +1,32 @@
+body
+{
+    background-color: white;
+}
+
+#wrapper {
+    width: 960px;
+    background-color: silver;
+    margin: 0 auto;
+}
+
+#hangman {
+    font-family: 'Notable', sans-serif;
+    color: lime;
+    background-color: darkblue;
+    border: 1px darkblue solid;
+    padding: 0 30px 20px 30px;
+    margin: 0;
+}
+
+#subtitle {
+    font-family: 'Faster One', sans-serif;
+    color: darkblue;
+    background-color: lime;
+    border: 1px darkblue solid;
+    padding: 10px 20px 10px 20px;
+    margin: 0;
+}
+
+.hrule {
+    border: 2px darkblue solid;
+}
