@@ -15,7 +15,7 @@ var Hangman =
         for (var i=0; i<this.display.length; i++)
         {
             var currentLetter = this.display[i];
-            if (currentLetter != " " && currentLetter != "'" && currentLetter != "," && currentLetter != "." && currentLetter != "?" && currentLetter != "!" && currentLetter != "&")
+            if (currentLetter.match(/[a-z]/i))
             {
                 this.display[i] = "_";
             }
@@ -29,13 +29,6 @@ var Hangman =
         this.display = this.display.join(" ").replace(/~/gi, "&nbsp;");
         this.gameAnswer = this.gameAnswer.join(" ").replace(/~/gi, "&nbsp;");
         this.renderResults();
-        /*
-        document.getElementById("result").innerHTML = this.display;
-        document.getElementById("winTotal").innerHTML = "# of Wins: " + wins;
-        document.getElementById("status").innerHTML = "Good Luck!";
-        document.getElementById("pastGuesses").innerHTML = "";
-        document.getElementById("guessesRemaining").innerHTML = this.guessCount;
-        */
     },
 
     processGuess: function()
@@ -96,25 +89,30 @@ var Hangman =
         if (this.guessCount >= 0)
         {
             this.guess = event.key;
-
-            if (this.guessHistory.indexOf(this.guess.toUpperCase()) < 0) 
+            if (!this.guess.match(/[a-z]/i))
             {
-                this.guessHistory.push(this.guess.toUpperCase());
-                this.guess = this.guess.toLowerCase();
-
-                this.display = this.processGuess();
-
-                if (this.gameAnswer.indexOf(this.guess) < 0)
-                    this.guessCount--;
-                
-                this.renderResults();
+                document.getElementById("status").innerHTML = "That key was not a letter. Please enter a letter A-Z."
             }
-            else 
+            else
             {
-                document.getElementById("status").innerHTML = "You already guessed that letter - try again."
+                if (this.guessHistory.indexOf(this.guess.toUpperCase()) < 0) 
+                {
+                    this.guessHistory.push(this.guess.toUpperCase());
+                    this.guess = this.guess.toLowerCase();
+
+                    this.display = this.processGuess();
+
+                    if (this.gameAnswer.indexOf(this.guess) < 0)
+                        this.guessCount--;
+                    
+                    this.renderResults();
+                }
+                else 
+                {
+                    document.getElementById("status").innerHTML = "You already guessed that letter - try again."
+                }
             }
         }
-        
     }
 }
 
