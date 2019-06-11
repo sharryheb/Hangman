@@ -86,15 +86,18 @@ var Hangman =
 
     gameControl: function(event)
     {
+        var isWordCharacter = event.key.length === 1;
+        var isBackspaceOrDelete = event.keyCode === 8 || event.keyCode === 46;
+    
         if (this.guessCount >= 0)
         {
-            this.guess = event.key;
-            if (!this.guess.match(/[a-z]/i))
+            if (!isWordCharacter || isBackspaceOrDelete)
             {
                 document.getElementById("status").innerHTML = "That key was not a letter. Please enter a letter A-Z."
             }
             else
             {
+                this.guess = event.key;
                 if (this.guessHistory.indexOf(this.guess.toUpperCase()) < 0) 
                 {
                     this.guessHistory.push(this.guess.toUpperCase());
@@ -115,9 +118,4 @@ var Hangman =
         }
     }
 }
-
-
-
-
-
 
